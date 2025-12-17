@@ -7,13 +7,18 @@ import javax.swing.*;
 public class game implements ActionListener {
     static int clicks = 0;
     static JFrame frame = new JFrame();
+    static JPanel panel = new JPanel();
     static JLabel label = new JLabel("Number of clicks: 0");
     public game() {
         // Read CSV file
         JButton button = new JButton("Click me!");
         button.addActionListener(this);
+        if (clicks == 1) {
+            JLabel newlabel = new JLabel("67777");
+            panel.add(newlabel);
+            frame.add(newlabel);
+        }
 
-        JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createEmptyBorder(60,60,60,60));
         panel.add(button);
         panel.add(label);
