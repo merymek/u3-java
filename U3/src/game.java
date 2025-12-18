@@ -3,39 +3,60 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import javax.swing.*;
+import javax.swing.border.Border;
 
-public class game implements ActionListener {
-    static int clicks = 0;
-    static JFrame frame = new JFrame();
-    static JPanel panel = new JPanel();
-    static JLabel label = new JLabel("Number of clicks: 0");
-    public game() {
-        // Read CSV file
-        JButton button = new JButton("Click me!");
-        button.addActionListener(this);
-        if (clicks == 1) {
-            JLabel newlabel = new JLabel("67777");
-            panel.add(newlabel);
-            frame.add(newlabel);
-        }
+public class game {
+    static void main(String[] args) {
+        // making the frame
+        JFrame frame = new JFrame("Password Checker");
+        frame.setSize(300,200);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
 
-        panel.setBorder(BorderFactory.createEmptyBorder(60,60,60,60));
-        panel.add(button);
-        panel.add(label);
+        // button
+        JButton button = new JButton("Enter your password:");
 
-        frame.add(panel, BorderLayout.CENTER);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("GUI");
-        frame.pack();
+        // Action listener
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                // password
+                JPasswordField passwordField = new JPasswordField();
+
+                int option = JOptionPane.showConfirmDialog(
+                        frame,
+                        passwordField,
+                        "Enter password",
+                        JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.PLAIN_MESSAGE
+                );
+
+                if (option == JOptionPane.OK_OPTION) {
+                    String password = new String(passwordField.getPassword());
+
+                    if (password.equals("67")) {
+                        JOptionPane.showMessageDialog(frame, "Harhar 67");
+                    }
+                    else if (password.equals("poutine")) {
+                        JOptionPane.showMessageDialog(frame, "Here's your poutine!");
+
+
+                        frame.setLayout(new BorderLayout());
+                        frame.add(photo, BorderLayout(CENTER));
+                        ImageIcon icon = new ImageIcon("poutine.webp");
+                        JLabel photo = new JLabel(icon);
+                        frame.getContentPane().add(photo);
+                        frame.revalidate();
+                        frame.repaint();
+                    } else {
+                        JOptionPane.showMessageDialog(frame,"Access denied!");
+                    }
+                }
+            }
+        });
+
         frame.setVisible(true);
-    }
 
-    public void actionPerformed(ActionEvent e) {
-        clicks++;
-        label.setText("Number of clicks: " + clicks);
-    }
-
-    public static void main(String[] args) {
-        new game();
     }
 }
